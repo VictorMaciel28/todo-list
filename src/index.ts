@@ -14,11 +14,21 @@ app.get("/tasks", async (req: Request, res: Response) => {
 });
 
 app.post("/tasks", async (req: Request, res: Response) => {
-  console.log(req.body);
-
   const { name, description, active } = req.body;
-  const tasks = await tasksModel.create(name, description, active);
-  res.json(tasks);
+  const newtask = await tasksModel.create(name, description, active);
+  res.json(newtask);
+});
+
+app.put("/tasks", async (req: Request, res: Response) => {
+  const { id, name, description } = req.body;
+  const editedTask = await tasksModel.edit(id, name, description);
+  res.json(editedTask);
+});
+
+app.delete("/task/:id", async (req: Request, res: Response) => {
+  const id = +req.params.id;
+  const deletedTask = await tasksModel.remove(id);
+  res.json(deletedTask);
 });
 
 app.get("/", async (req: Request, res: Response) => {
