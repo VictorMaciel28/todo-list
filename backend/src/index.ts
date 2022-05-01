@@ -26,13 +26,13 @@ app.put("/tasks", async (req: Request, res: Response) => {
 });
 
 app.delete("/task/:id", async (req: Request, res: Response) => {
-  const id = +req.params.id;
-  const deletedTask = await tasksModel.remove(id);
+  const id = req.params.id;
+  const deletedTask = await tasksModel.remove('id');
   res.json(deletedTask);
 });
 
 app.put("/task/:id", async (req: Request, res: Response) => {
-  const id = +req.params.id;
+  const id = req.params.id;
   const active = req.body.active;
   const updatedTask = await tasksModel.update(id, active);
   res.json(updatedTask);

@@ -1,12 +1,16 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { idText } from "typescript";
+const uuidv4 = require('uuid');
+
+
 const prisma = new PrismaClient();
 
 export class TasksModel {
   create(name: string, description: string, active: boolean) {
     return prisma.tasks.create({
       data: {
+        id: uuidv4.v1(),
         name,
         description,
         active,
@@ -14,7 +18,7 @@ export class TasksModel {
     });
   }
 
-  edit(id: number, name: string, description: string) {
+  edit(id: string, name: string, description: string) {
     return prisma.tasks.update({
       where: {
         id,
@@ -26,7 +30,7 @@ export class TasksModel {
     });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return prisma.tasks.delete({
       where: {
         id,
@@ -34,7 +38,7 @@ export class TasksModel {
     });
   }
 
-  update(id: number, active: boolean) {
+  update(id: string, active: boolean) {
     return prisma.tasks.update({
       where: {
         id,

@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Tasks {
-  id Int @default(autoincrement()) @id
+  id String @unique
   name String 
   description String
   active Boolean
