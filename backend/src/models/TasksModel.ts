@@ -7,7 +7,7 @@ export class TasksModel {
   create(name: string, description: string, active: boolean) {
     return prisma.tasks.create({
       data: {
-        name: name,
+        name,
         description,
         active,
       },
@@ -17,11 +17,11 @@ export class TasksModel {
   edit(id: number, name: string, description: string) {
     return prisma.tasks.update({
       where: {
-        id: id,
+        id,
       },
       data: {
-        name: name,
-        description: description,
+        name,
+        description,
       },
     });
   }
@@ -29,13 +29,23 @@ export class TasksModel {
   remove(id: number) {
     return prisma.tasks.delete({
       where: {
-        id: id,
+        id,
+      },
+    });
+  }
+
+  update(id: number, active: boolean) {
+    return prisma.tasks.update({
+      where: {
+        id,
+      },
+      data: {
+        active,
       },
     });
   }
 
   async findAll() {
-    const tasksMany = await prisma.tasks.findMany();
-    return tasksMany;
+    return await prisma.tasks.findMany();
   }
 }

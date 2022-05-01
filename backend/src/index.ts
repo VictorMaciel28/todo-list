@@ -31,9 +31,15 @@ app.delete("/task/:id", async (req: Request, res: Response) => {
   res.json(deletedTask);
 });
 
+app.put("/task/:id", async (req: Request, res: Response) => {
+  const id = +req.params.id;
+  const active = req.body.active;
+  const updatedTask = await tasksModel.update(id, active);
+  res.json(updatedTask);
+});
+
 app.get("/", async (req: Request, res: Response) => {
-  console.log("Listen on 3030");
-  res.send({ message: "funcionando" });
+  res.send({ message: "Server running on port 3030" });
 });
 
 app.listen("3030", () => {
