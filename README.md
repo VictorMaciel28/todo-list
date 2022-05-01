@@ -1,8 +1,7 @@
 # CRUD- Todo Node & Angular
 
-###  Instalação
+###  Instalação: 
 
-<br/>
 <br/>
 
 ```shell
@@ -11,6 +10,7 @@ Clone:
 git clone https://github.com/VictorMaciel28/todo-list.git
 
 ```
+
 ####Backend na porta 3030:
 
 ```shell
@@ -27,4 +27,5 @@ Rodar backend:
 $ yarn dev
 
 ```
+
 ####Frontend on port 3000:
