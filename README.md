@@ -11,6 +11,18 @@ git clone https://github.com/VictorMaciel28/todo-list.git
 
 ```
 
+#### Banco de dados:
+
+´´´shell
+
+Arquivo .env em /backend com a variável:
+
+DATABASE_URL="mysql://user:password@endereco:porta/todo-list?schema=public"
+
+
+´´´
+
+
 ##### Backend na porta 3030:
 
 ```shell
