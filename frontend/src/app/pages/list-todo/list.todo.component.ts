@@ -22,6 +22,11 @@ export class ListTodoComponent implements OnInit {
 
   constructor(private listTodoService: ListTodoService) {}
 
+  ngOnInit(): void {
+    this.getList();
+    this.getListCompleted();
+  }
+
   getList = () => {
     this.listTodoService.getList().subscribe((response) => {
       this.taskList = response;
@@ -45,7 +50,11 @@ export class ListTodoComponent implements OnInit {
 
   submitEditTask() {
     this.listTodoService
-      .submitEditTask(this.idTaskToEdit, this.nameInputValue, this.descriptionInputValue)
+      .submitEditTask(
+        this.idTaskToEdit,
+        this.nameInputValue,
+        this.descriptionInputValue
+      )
       .subscribe(() => {
         this.getList();
         this.getListCompleted();
@@ -77,22 +86,21 @@ export class ListTodoComponent implements OnInit {
   }
 
   openFieldView(type: string) {
-    this.isOpenFieldView = !this.isOpenFieldView;
+    this.isOpenFieldView = true;
     this.nameInputValue = '';
     this.descriptionInputValue = '';
     this.typeForm = type;
   }
 
-  editFieldView(id: string,name: string, description: string) {
+  closeForm(){
     this.isOpenFieldView = !this.isOpenFieldView;
+  };
+
+  editFieldView(id: string, name: string, description: string) {
+    this.isOpenFieldView = true;
     this.idTaskToEdit = id;
     this.nameInputValue = name;
     this.descriptionInputValue = description;
     this.typeForm = 'edit';
-  }
-
-  ngOnInit(): void {
-    this.getList();
-    this.getListCompleted();
   }
 }

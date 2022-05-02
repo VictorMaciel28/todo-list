@@ -23,6 +23,9 @@ $ yarn install
 Rodar Migratons:
 $ yarn prisma migrate dev --name init
 
+Rodar Seeding
+$ npx prisma db seed
+
 Rodar backend:
 $ yarn dev
 
