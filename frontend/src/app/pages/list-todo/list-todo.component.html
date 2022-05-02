@@ -1,0 +1,123 @@
+<br />
+<h2>Em progresso:</h2>
+<mat-selection-list>
+  <mat-list-item *ngFor="let task of taskList">
+    <ng-container>
+      <mat-action-list style="width: 80%">
+        <button mat-list-item>{{ task.name }} - {{ task.description }}</button>
+      </mat-action-list>
+      <div>
+        <button
+          (click)="changeStatus(task.id, task.active)"
+          mat-raised-button
+          color="basic"
+        >
+          Completar
+        </button>
+      </div>
+      <div style="margin: 0 1% 0 1%">
+        <button
+          (click)="editFieldView(task.id, task.name, task.description)"
+          mat-raised-button
+          color="primary"
+        >
+          Editar
+        </button>
+      </div>
+      <div>
+        <button (click)="deleteTask(task.id)" mat-raised-button color="warn">
+          Deletar
+        </button>
+      </div>
+    </ng-container>
+  </mat-list-item>
+</mat-selection-list>
+
+<br />
+<h2>Concluídas:</h2>
+<mat-selection-list>
+  <mat-list-item *ngFor="let task of taskListCompleted">
+    <ng-container>
+      <mat-action-list style="width: 80%">
+        <button mat-list-item>{{ task.name }} - {{ task.description }}</button>
+      </mat-action-list>
+      <div>
+        <button
+          (click)="changeStatus(task.id, task.active)"
+          mat-raised-button
+          color="basic"
+        >
+          Retornar
+        </button>
+      </div>
+      <div style="margin: 0 1% 0 1%">
+        <button
+          (click)="editFieldView(task.id, task.name, task.description)"
+          mat-raised-button
+          color="primary"
+        >
+          Editar
+        </button>
+      </div>
+      <div>
+        <button (click)="deleteTask(task.id)" mat-raised-button color="warn">
+          Deletar
+        </button>
+      </div>
+    </ng-container>
+  </mat-list-item>
+</mat-selection-list>
+<br />
+<div>
+  <button (click)="openFieldView('create')" mat-raised-button color="primary">
+    Nova Tarefa
+  </button>
+</div>
+
+<div *ngIf="isOpenFieldView" style="margin: 5%">
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Nome da Tarefa</mat-label>
+    <input
+      [value]="nameInputValue"
+      (keyup)="listenerNameValue($event)"
+      matInput
+      placeholder="Ex. Fazer compras"
+      required
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Descrição </mat-label>
+    <input
+      [value]="descriptionInputValue"
+      (keyup)="listenerDescValue($event)"
+      matInput
+      placeholder="Ex. Comprar shampoo, sabonete ingredientes pra janta"
+      required
+    />
+  </mat-form-field>
+  <button
+    (click)="submitNewTask()"
+    *ngIf="typeForm === 'create'"
+    mat-raised-button
+    color="primary"
+  >
+    Criar Tarefa
+  </button>
+  <button
+    (click)="submitEditTask()"
+    *ngIf="typeForm === 'edit'"
+    mat-raised-button
+    color="primary"
+  >
+    Salvar Tarefa
+  </button>
+  <button
+    (click)="openFieldView('create')"
+    style="margin-left: 1%"
+    mat-raised-button
+    color="warn"
+  >
+    Cancelar
+  </button>
+</div>

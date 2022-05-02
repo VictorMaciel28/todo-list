@@ -11,7 +11,7 @@ git clone https://github.com/VictorMaciel28/todo-list.git
 
 ```
 
-####Backend na porta 3030:
+##### Backend na porta 3030:
 
 ```shell
 
@@ -28,4 +28,17 @@ $ yarn dev
 
 ```
 
-####Frontend on port 3000:
+#### Frontend na porta 4200:
+
+
+```shell
+
+$ cd frontend
+
+Baixar dependencias:
+$ yarn install
+
+Rodar frontend:
+$ ng serve
+
+```

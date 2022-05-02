@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { allowedNodeEnvironmentFlags } from "process";
+import cors from 'cors';
 import { TasksModel } from "./models/TasksModel";
 const app = express();
 const prisma = new PrismaClient();
@@ -8,8 +8,19 @@ const tasksModel = new TasksModel();
 
 app.use(express.json());
 
+const allowedOrigins = ['http://localhost:4200'];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
+
 app.get("/tasks", async (req: Request, res: Response) => {
   const alltasks = await tasksModel.findAll();
+  res.json(alltasks);
+});
+
+app.get("/tasks/completed", async (req: Request, res: Response) => {
+  const alltasks = await tasksModel.findAllCompleted();
   res.json(alltasks);
 });
 
@@ -27,14 +38,14 @@ app.put("/tasks", async (req: Request, res: Response) => {
 
 app.delete("/task/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
-  const deletedTask = await tasksModel.remove('id');
+  const deletedTask = await tasksModel.remove(id);
   res.json(deletedTask);
 });
 
 app.put("/task/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   const active = req.body.active;
-  const updatedTask = await tasksModel.update(id, active);
+  const updatedTask = await tasksModel.update(id, !active);
   res.json(updatedTask);
 });
 
