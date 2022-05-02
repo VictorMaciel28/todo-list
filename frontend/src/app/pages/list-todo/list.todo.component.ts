@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
 import { ListTodoService } from '../todo.service';
 import { Task } from '../list-todo/list.todo.interface';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'list-todo',
@@ -78,6 +76,14 @@ export class ListTodoComponent implements OnInit {
       });
   }
 
+  editFieldView(id: string, name: string, description: string) {
+    this.isOpenFieldView = true;
+    this.idTaskToEdit = id;
+    this.nameInputValue = name;
+    this.descriptionInputValue = description;
+    this.typeForm = 'edit';
+  }
+
   deleteTask(id: string) {
     this.listTodoService.deleteTask(id).subscribe(() => {
       this.getList();
@@ -92,15 +98,24 @@ export class ListTodoComponent implements OnInit {
     this.typeForm = type;
   }
 
-  closeForm(){
+  closeForm() {
     this.isOpenFieldView = !this.isOpenFieldView;
-  };
+  }
 
-  editFieldView(id: string, name: string, description: string) {
-    this.isOpenFieldView = true;
-    this.idTaskToEdit = id;
-    this.nameInputValue = name;
-    this.descriptionInputValue = description;
-    this.typeForm = 'edit';
+  downloadFile() {
+    let data = this.taskList.concat(this.taskListCompleted);
+
+    const replacer = (key: any, value: any) => (value === null ? '' : value); // specify how you want to handle null values here
+    const header = Object.keys(data[0]);
+    let csv = data.map((row: any) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(',')
+    );
+    csv.unshift(header.join(','));
+    let csvArray = csv.join('\r\n');
+
+    var blob = new Blob([csvArray], { type: 'text/csv' });
+    saveAs(blob, 'myFile.csv');
   }
 }

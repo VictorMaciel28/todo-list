@@ -72,6 +72,8 @@
   <button (click)="openFieldView('create')" mat-raised-button color="primary">
     Nova Tarefa
   </button>
+  <button style="margin-left: 1%;"
+  (click)="downloadFile()" mat-raised-button color="baisc"> Baixar .CSV </button>
 </div>
 
 <div *ngIf="isOpenFieldView" style="margin: 5%">
@@ -121,3 +123,4 @@
     Cancelar
   </button>
 </div>
+
