@@ -23,7 +23,7 @@ DATABASE_URL="mysql://user:password@endereco:porta/todo-list?schema=public"
 ```
 
 
-##### Backend na porta 3030:
+#### Backend na porta 3030:
 
 ```shell
 
@@ -57,3 +57,11 @@ Rodar frontend:
 $ ng serve
 
 ```
+
+#### Algumas Imagens:
+
+<img src="screenshots/main_page.png">
+
+<br/>
+
+<img src="screenshots/edit_func.png">
