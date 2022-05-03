@@ -10,12 +10,7 @@ export class ListTodoService {
   constructor(private http: HttpClient) {}
 
   URL = environment.apiURL;
-
-  /*getData(productURL: string){
-        let url = 'https://api.jsonbin.io/b/' + productURL;
-        return this.http.get<Data>(url);
-    }*/
-
+  
   getList() {
     return this.http.get<Task[]>(this.URL + '/tasks');
   }
